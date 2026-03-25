@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worldview - The Dark Circus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- [기본 세팅] --- */
+        body { 
+            background-color: #050505; 
+            color: #dcdcdc; 
+            /* 본문은 소설책 느낌이 나도록 명조체(Serif) 사용 */
+            font-family: 'Noto Serif KR', serif; 
+            margin: 0; 
+            overflow-x: hidden; 
+        }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        
+        /* --- [네비게이션 (공통)] --- */
+        nav { display: flex; justify-content: space-between; padding: 20px 50px; border-bottom: 1px solid rgba(255,255,255,0.1); font-family: 'Noto Sans KR', sans-serif;}
+        .logo { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #fff; }
+        .menu { display: flex; gap: 40px; list-style: none; margin: 0; padding: 0; }
+        .menu li a { font-family: 'Cinzel', serif; opacity: 0.6; }
+        .menu li a:hover { opacity: 1; color: #ff003c; text-shadow: 0 0 10px rgba(255, 0, 60, 0.5); }
+
+        /* --- [세계관 컨텐츠 영역] --- */
+        .lore-container { 
+            padding: 100px 20px; 
+            max-width: 800px; /* 글을 읽기 편한 너비 */
+            margin: 0 auto; 
+        }
+        
+        .page-title { 
+            font-family: 'Cinzel', serif; 
+            text-align: center; 
+            font-size: 3rem; 
+            margin-bottom: 60px; 
+            letter-spacing: 5px; 
+            color: #fff; 
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); 
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+        }
+
+        /* 각 챕터 스타일 */
+        .lore-section {
+            margin-bottom: 60px;
+            padding-left: 20px;
+            border-left: 2px solid #222; /* 왼쪽에 희미한 선 */
+            transition: 0.3s;
+        }
+        .lore-section:hover {
+            border-left-color: #ff003c; /* 마우스를 올리면 선이 붉게 빛남 */
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .section-title span {
+            color: #ff003c;
+            margin-right: 10px;
+        }
+
+        .lore-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #aaa;
+            text-align: justify; /* 양쪽 정렬 */
+            margin-bottom: 15px;
+        }
+
+        /* 게임 시스템적인 규칙을 설명하는 부분 */
+        .rules-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dotted #555;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .rules-box ul {
+            list-style-type: square;
+            padding-left: 20px;
+            color: #bbb;
+            line-height: 1.6;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.9rem;
+        }
+        .rules-box li { margin-bottom: 10px; }
+        .highlight { color: #ff003c; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">† DARK CIRCUS</div>
+        <ul class="menu">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="worldview.html" style="color:#ff003c; opacity:1; text-shadow: 0 0 10px rgba(255, 0, 60, 0.5);">WORLDVIEW</a></li>
+            <li><a href="profiles.html">PROFILES</a></li>
+            <li><a href="hidden.html">???</a></li>
+        </ul>
+    </nav>
+
+    <div class="lore-container">
+        <h1 class="page-title">THE GRIMOIRE</h1>
+
+        <section class="lore-section">
+            <h2 class="section-title"><span>I.</span> 핏빛 계약과 영원의 무대</h2>
+            <p class="lore-text">
+                심연의 가장 깊은 곳, 언제나 기괴한 미소를 짓고 있는 지배자와의 절대적인 계약으로 세워진 이 천막은 밤이 되면 나타나고 새벽이 오면 안개처럼 사라집니다. 단원들은 각자의 영혼을 담보로 능력을 부여받았으며, 이들에게 남은 것은 오직 끝없는 공연뿐입니다.
+            </p>
+        </section>
+
+        <section class="lore-section">
+            <h2 class="section-title"><span>II.</span> 네 개의 기숙 구역</h2>
+            <p class="lore-text">
+                거대한 서커스 천막 내부는 각자의 고유한 마법과 수호령을 모시는 4개의 기숙 구역으로 나뉘어 있습니다. 맹수 조련사들의 구역, 환영술사들의 구역 등 단원들은 자신의 적성에 맞는 구역에 소속되어 무대를 준비합니다. 구역 간의 세력 다툼은 이 서커스의 또 다른 볼거리입니다.
+            </p>
+        </section>
+
+        <section class="lore-section">
+            <h2 class="section-title"><span>III.</span> 무대 교전 수칙 (Stage Rules)</h2>
+            <p class="lore-text">
+                관객석 난입자나 통제 불능의 마수를 제압하기 위해, 중앙 무대에서는 엄격한 턴제(Turn-based) 교전 규칙이 적용됩니다. 속성 간의 상성을 이해하고 스킬을 조합하는 것만이 생존율을 높이는 유일한 길입니다.
+            </p>
+            <div class="rules-box">
+                <ul>
+                    <li><span class="highlight">[상성 시스템]</span> 각 단원과 몬스터는 고유한 속성을 가지며, 상성에 따라 피해량이 증감합니다.</li>
+                    <li><span class="highlight">[이성(SAN) 수치]</span> 강력한 마법을 사용할수록 이성 수치가 감소합니다. 0이 되면 이성을 잃고 폭주합니다.</li>
+                    <li><span class="highlight">[전투 결과]</span> 무대가 끝난 후, 단장의 심사에 따라 생존자들의 상태창이 업데이트되며 새로운 칭호를 획득할 수 있습니다.</li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
