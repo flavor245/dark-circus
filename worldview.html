@@ -92,6 +92,52 @@
         }
         .rules-box li { margin-bottom: 10px; }
         .highlight { color: #ff003c; font-weight: bold; }
+
+        /* --- [블러 처리 효과] --- */
+        .blur-wrapper {
+            position: relative; /* 버튼을 텍스트 중앙에 띄우기 위한 기준점 */
+            margin-top: 15px;
+        }
+
+        .blur-content {
+            filter: blur(6px); /* 글씨를 6px만큼 뿌옇게 만듦 */
+            opacity: 0.5; /* 살짝 어둡게 */
+            transition: all 1.5s ease; /* 1.5초 동안 스르륵 변하는 애니메이션 */
+            user-select: none; /* 드래그해서 복사하는 것 방지 */
+            pointer-events: none; /* 클릭 방지 */
+        }
+
+        /* 버튼을 눌러서 'revealed' 상태가 되었을 때의 모습 */
+        .blur-content.revealed {
+            filter: blur(0); /* 뿌연 효과 제거 */
+            opacity: 1; /* 원래 밝기로 */
+            user-select: auto;
+            pointer-events: auto;
+        }
+
+        /* 진실 확인하기 버튼 */
+        .reveal-btn {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%); /* 정확히 한가운데 배치 */
+            background: rgba(0, 0, 0, 0.8);
+            color: #ff003c;
+            border: 1px solid #ff003c;
+            padding: 12px 30px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: bold;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 10;
+        }
+
+        .reveal-btn:hover {
+            background: #ff003c;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.8);
+        }
     </style>
 </head>
 <body>
@@ -176,19 +222,54 @@
 
         <section class="lore-section">
             <h2 class="section-title"><span>III.</span> 무대 교전 수칙 (Stage Rules)</h2>
-            <p class="lore-text">
-               
-            </p>
-            <div class="rules-box">
-                <ul>
-                    <li><span class="highlight">[상성 시스템]</span> 각 단원과 몬스터는 고유한 속성을 가지며, 상성에 따라 피해량이 증감합니다.</li>
-                    <li><span class="highlight">[이성(SAN) 수치]</span> 강력한 마법을 사용할수록 이성 수치가 감소합니다. 0이 되면 이성을 잃고 폭주합니다.</li>
-                    <li><span class="highlight">[전투 결과]</span> 무대가 끝난 후, 단장의 심사에 따라 생존자들의 상태창이 업데이트되며 새로운 칭호를 획득할 수 있습니다.</li>
-                </ul>
+            
+            <div class="blur-wrapper">
+                
+                <button class="reveal-btn" id="truth-btn" onclick="revealTruth()">진실 확인하기</button>
+
+                <div class="blur-content" id="secret-text">
+                    <div class="rules-box">
+                        <ul>
+                            그것은 처음부터 서커스장이 아니었다.
+
+천막이 있고, 무대가 있고, 조명이 있고, 브라스밴드가 울리는 것은 사실이다. 솜사탕 냄새가 나고, 관객석이 있고, 단원들이 공연을 하며, 박수가 터지는 것도 사실이다. 하지만 그 모든 것은 천막도, 무대도, 달콤한 냄새도, 보랏빛 하늘에 떠 있는 붉은 달까지도 한 마리 짐승의 몸이다.
+
+판타스마고리아는 살아있다.
+
+심장이 있는지, 뇌가 있는지, 눈이 있는지는 알 수 없다. 다만 한 가지는 확실하다. 그것은 배가 고프다. 태어난 이래 단 한 번도 배가 부른 적이 없으며, 앞으로도 없을 것이다. 허기. 그것이 판타스마고리아를 움직이는 유일한 이유다. 사냥감을 유인하는 꽃의 향기처럼 달콤한 냄새를 풍기고, 벌레를 삼키는 풀잎처럼 조용히 입을 벌리고 있을 뿐이다. 의도도 악의도 없다. 다만 굶주려 있다.
+
+먹이는 영혼이다.
+
+인간의 영혼. 그 안에 담긴 이름, 기억, 감각, 감정, 그리고 존재 자체. 판타스마고리아가 '티켓'이라 부르는 것은 식사의 첫 입이다. 이름을 내어주면 그 인간의 기억을 내면 기억의 맛을 보고, 감각을 내면 감각의 맛을 보고, 영혼을 내면 본식이 시작된다. 관객이 서커스 안에 오래 머물수록 영혼은 천천히 녹아내린다. 솜사탕이 혀 위에서 사라지듯, 소리 없이, 아프지 않게, 자신이 사라지고 있다는 것조차 모른 채.
+
+그것이 잠식이다.
+
+서커스의 달콤한 공기를 마시고, 서커스의 음식을 먹고, 서커스의 공연에 박수를 치고, 서커스의 주민들과 어울릴수록 인간은 녹는다. 처음에는 어제의 기억이 흐릿해진다. 다음에는 자기 이름의 발음이 어색해진다. 그 다음에는 거울을 봐도 누가 비치는지 모르게 된다. 마지막에는 아무것도 남지 않는다. 빈 껍데기 하나가 서커스 의상을 입고, 무대 위에 서서, 다음 관객에게 손을 흔든다.
+
+단원이 된다.
+
+서커스의 주민들 뿔이 달리고, 날개가 있고, 그림자로 이루어진 존재들 은 한때 관객이었다. 인간이었다. 티켓을 끊고, 공연을 보고, 박수를 치다가, 돌아가는 길을 잊고, 이름을 잊고, 얼굴을 잃고, 결국 서커스의 뼈와 살이 된 자들이다. 그들은 그 사실을 모른다. 기억이 이미 소화되었으니까.
+
+판타스마고리아는 이것을 반복한다. 관객을 불러들이고, 달콤하게 적시고, 천천히 녹이고, 삼키고, 다시 배가 고파지면 다음 관객을 부른다. 끝이 없다. 짐승에게 포만감이란 없으니까.
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </section>
 
     </div>
 
 </body>
+    <script>
+        function revealTruth() {
+            // 1. 뿌옇게 되어있는 텍스트에 'revealed' 클래스를 추가해서 선명하게 만듭니다.
+            document.getElementById('secret-text').classList.add('revealed');
+            
+            // 2. '진실 확인하기' 버튼 자신은 스르륵 투명해지면서 사라지게 합니다.
+            const btn = document.getElementById('truth-btn');
+            btn.style.opacity = '0';
+            setTimeout(() => { btn.style.display = 'none'; }, 300);
+        }
+    </script>
 </html>
