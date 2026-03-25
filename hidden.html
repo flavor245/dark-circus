@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>??? - The Dark Circus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- [기본 세팅] --- */
+        body { background-color: #050505; color: #dcdcdc; font-family: 'Noto Sans KR', sans-serif; margin: 0; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        nav { display: flex; justify-content: space-between; padding: 20px 50px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #fff; }
+        .menu { display: flex; gap: 40px; list-style: none; margin: 0; padding: 0; }
+        .menu li a { font-family: 'Cinzel', serif; opacity: 0.6; }
+        .menu li a:hover { opacity: 1; color: #ff003c; text-shadow: 0 0 10px rgba(255, 0, 60, 0.5); }
+
+        /* --- [자물쇠(로그인) 화면 스타일] --- */
+        .lock-container {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            height: 70vh; text-align: center;
+        }
+        .warning-title { 
+            font-family: 'Cinzel', serif; font-size: 2rem; color: #ff003c; 
+            margin-bottom: 20px; letter-spacing: 5px; 
+        }
+        .pw-input {
+            background: transparent; border: none; border-bottom: 2px solid #555;
+            color: #fff; font-size: 1.5rem; text-align: center; padding: 10px; 
+            font-family: 'Cinzel', serif; outline: none; transition: 0.3s;
+            letter-spacing: 5px; width: 300px; margin-bottom: 10px;
+        }
+        .pw-input:focus { border-bottom-color: #ff003c; }
+        
+        .error-msg { 
+            color: #ff003c; font-size: 0.9rem; opacity: 0; transition: 0.3s; 
+            letter-spacing: 1px;
+        }
+
+        /* --- [숨겨진 진실(비밀 컨텐츠) 화면] - 처음엔 안 보이게 설정 --- */
+        #secret-content { 
+            display: none; /* 핵심: 처음엔 감춰둠 */
+            padding: 100px 50px; max-width: 800px; margin: 0 auto; text-align: center; 
+        }
+        .secret-title { 
+            font-family: 'Cinzel', serif; font-size: 3rem; color: #fff; 
+            text-shadow: 0 0 20px #ff003c; margin-bottom: 30px; 
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">† DARK CIRCUS</div>
+        <ul class="menu">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="worldview.html">WORLDVIEW</a></li>
+            <li><a href="profiles.html">PROFILES</a></li>
+            <li><a href="hidden.html" style="color:#ff003c; opacity:1; text-shadow: 0 0 10px rgba(255, 0, 60, 0.5);">???</a></li>
+        </ul>
+    </nav>
+
+    <div class="lock-container" id="lock-screen">
+        <h1 class="warning-title">RESTRICTED AREA</h1>
+        <p style="margin-bottom: 30px; color: #888;">단장 외 접근 금지. 암호를 입력하십시오.</p>
+        
+        <input type="password" id="password-input" class="pw-input" placeholder="ENTER KEY" onkeypress="checkEnter(event)">
+        
+        <p class="error-msg" id="error-message">접근 거부: 일치하지 않는 영혼입니다.</p>
+    </div>
+
+    <div id="secret-content">
+        <h1 class="secret-title">THE TRUTH</h1>
+        <p style="color: #aaa; line-height: 1.8;">
+            이곳은 서커스의 가장 깊은 심연입니다.<br>
+            화려한 무대 뒤편에서 희생된 자들의 기록과 금지된 흑마법의 원전이 잠들어 있습니다.
+        </p>
+        <br><br>
+        <p style="color: #555;">(여기에 숨겨진 설정이나 기괴한 이미지를 추가하세요)</p>
+    </div>
+
+    <script>
+        function checkPassword() {
+            // 입력된 값 가져오기
+            const input = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('error-message');
+            const lockScreen = document.getElementById('lock-screen');
+            const secretContent = document.getElementById('secret-content');
+
+            // ▼▼▼ 여기에 원하는 비밀번호를 설정하세요! ▼▼▼
+            const correctPassword = "The Circus is Alive"; 
+
+            // 입력한 값과 비밀번호가 같으면 (대소문자 구분 없이 확인)
+            if (input.toLowerCase() === correctPassword) {
+                // 1. 자물쇠 화면을 숨깁니다.
+                lockScreen.style.display = "none";
+                // 2. 숨겨진 컨텐츠를 보여줍니다!
+                secretContent.style.display = "block";
+            } else {
+                // 틀리면 에러 메시지를 깜빡이게 합니다.
+                errorMsg.style.opacity = "1";
+                setTimeout(() => { errorMsg.style.opacity = "0"; }, 2000); // 2초 뒤 사라짐
+            }
+        }
+
+        // 엔터키를 눌렀을 때 작동하게 하는 기능
+        function checkEnter(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        }
+    </script>
+</body>
+</html>
