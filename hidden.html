@@ -24,22 +24,48 @@
             font-family: 'Cinzel', serif; font-size: 2rem; color: #ff003c; 
             margin-bottom: 20px; letter-spacing: 5px; 
         }
+        
+        /* 비밀번호 입력칸을 감싸는 상자 (눈 모양 버튼을 넣기 위해 필요) */
+        .input-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
         .pw-input {
             background: transparent; border: none; border-bottom: 2px solid #555;
             color: #fff; font-size: 1.5rem; text-align: center; padding: 10px; 
+            padding-right: 70px; /* 버튼이 들어갈 자리 비워두기 */
             font-family: 'Cinzel', serif; outline: none; transition: 0.3s;
-            letter-spacing: 5px; width: 300px; margin-bottom: 10px;
+            letter-spacing: 5px; width: 300px; 
         }
         .pw-input:focus { border-bottom-color: #ff003c; }
+
+        /* 눈 모양(보기/숨기기) 버튼 스타일 */
+        .toggle-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #888;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .toggle-btn:hover { color: #ff003c; }
         
         .error-msg { 
             color: #ff003c; font-size: 0.9rem; opacity: 0; transition: 0.3s; 
-            letter-spacing: 1px;
+            letter-spacing: 1px; margin-top: 10px;
         }
 
-        /* --- [숨겨진 진실(비밀 컨텐츠) 화면] - 처음엔 안 보이게 설정 --- */
+        /* --- [숨겨진 진실(비밀 컨텐츠) 화면] --- */
         #secret-content { 
-            display: none; /* 핵심: 처음엔 감춰둠 */
+            display: none;
             padding: 100px 50px; max-width: 800px; margin: 0 auto; text-align: center; 
         }
         .secret-title { 
@@ -62,9 +88,12 @@
 
     <div class="lock-container" id="lock-screen">
         <h1 class="warning-title">RESTRICTED AREA</h1>
-        <p style="margin-bottom: 30px; color: #888;">쪽지를 찾아 입력하세요.</p>
+        <p style="margin-bottom: 30px; color: #888;">쪽지를 찾아 조합하세요.</p>
         
-        <input type="password" id="password-input" class="pw-input" placeholder="ENTER KEY" onkeypress="checkEnter(event)">
+        <div class="input-wrapper">
+            <input type="password" id="password-input" class="pw-input" placeholder="ENTER KEY" onkeypress="checkEnter(event)">
+            <button type="button" class="toggle-btn" id="toggle-btn" onclick="togglePassword()">[ SHOW ]</button>
+        </div>
         
         <p class="error-msg" id="error-message">Error: 일치하지 않는 영혼입니다.</p>
     </div>
@@ -75,35 +104,45 @@
             이곳은 서커스의 가장 깊은 심연입니다.<br>
             화려한 무대 뒤편에서 희생된 자들의 기록과 금지된 흑마법의 원전이 잠들어 있습니다.
         </p>
-        <br><br>
-        <p style="color: #555;">(여기에 숨겨진 설정이나 기괴한 이미지를 추가하세요)</p>
     </div>
 
     <script>
+        // --- [비밀번호 보기/숨기기 기능] ---
+        function togglePassword() {
+            const input = document.getElementById('password-input');
+            const btn = document.getElementById('toggle-btn');
+
+            if (input.type === "password") {
+                input.type = "text"; // 글자 보이게 변경
+                btn.innerText = "[ HIDE ]"; // 버튼 글자 변경
+                btn.style.color = "#ff003c"; // 켜졌을 때 붉은색으로 강조
+            } else {
+                input.type = "password"; // 다시 별표로 숨기기
+                btn.innerText = "[ SHOW ]";
+                btn.style.color = "#888";
+            }
+        }
+
+        // --- [비밀번호 확인 기능] ---
         function checkPassword() {
-            // 입력된 값 가져오기
-            const input = document.getElementById('password-input').value;
+            // .trim()을 추가해서 앞뒤의 실수로 들어간 띄어쓰기를 무시합니다.
+            const input = document.getElementById('password-input').value.trim();
             const errorMsg = document.getElementById('error-message');
             const lockScreen = document.getElementById('lock-screen');
             const secretContent = document.getElementById('secret-content');
 
-            // ▼▼▼ 여기에 원하는 비밀번호를 설정하세요! ▼▼▼
-            const correctPassword = "The Circus is Alive"; 
+            // ▼ 정답 설정 (소문자로 입력해주세요)
+            const correctPassword = "abyss"; 
 
-            // 입력한 값과 비밀번호가 같으면 (대소문자 구분 없이 확인)
             if (input.toLowerCase() === correctPassword) {
-                // 1. 자물쇠 화면을 숨깁니다.
                 lockScreen.style.display = "none";
-                // 2. 숨겨진 컨텐츠를 보여줍니다!
                 secretContent.style.display = "block";
             } else {
-                // 틀리면 에러 메시지를 깜빡이게 합니다.
                 errorMsg.style.opacity = "1";
-                setTimeout(() => { errorMsg.style.opacity = "0"; }, 2000); // 2초 뒤 사라짐
+                setTimeout(() => { errorMsg.style.opacity = "0"; }, 2000);
             }
         }
 
-        // 엔터키를 눌렀을 때 작동하게 하는 기능
         function checkEnter(event) {
             if (event.key === "Enter") {
                 checkPassword();
