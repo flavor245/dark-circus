@@ -113,11 +113,11 @@
             const btn = document.getElementById('toggle-btn');
 
             if (input.type === "password") {
-                input.type = "text"; // 글자 보이게 변경
-                btn.innerText = "[ HIDE ]"; // 버튼 글자 변경
-                btn.style.color = "#ff003c"; // 켜졌을 때 붉은색으로 강조
+                input.type = "text"; 
+                btn.innerText = "[ HIDE ]"; 
+                btn.style.color = "#ff003c"; 
             } else {
-                input.type = "password"; // 다시 별표로 숨기기
+                input.type = "password"; 
                 btn.innerText = "[ SHOW ]";
                 btn.style.color = "#888";
             }
@@ -125,16 +125,24 @@
 
         // --- [비밀번호 확인 기능] ---
         function checkPassword() {
-            // .trim()을 추가해서 앞뒤의 실수로 들어간 띄어쓰기를 무시합니다.
-            const input = document.getElementById('password-input').value.trim();
+            // 1. 입력창에 적힌 글자를 가져옵니다.
+            const rawInput = document.getElementById('password-input').value;
+            
+            // 2. 입력된 글자를 소문자로 바꾸고, 모든 띄어쓰기를 완전히 없앱니다! (핵심)
+            const cleanInput = rawInput.toLowerCase().replace(/\s+/g, '');
+
             const errorMsg = document.getElementById('error-message');
             const lockScreen = document.getElementById('lock-screen');
             const secretContent = document.getElementById('secret-content');
 
-            // ▼ 정답 설정 (소문자로 입력해주세요)
-            const correctPassword = "thecircusisalive"; 
+            // ▼ 정답 설정 (원하는 문장을 적으세요. 띄어쓰기가 있어도 상관없습니다!)
+            const correctPassword = "the circus is alive"; 
+            
+            // 정답 역시 소문자로 바꾸고 모든 띄어쓰기를 없애서 비교합니다.
+            const cleanPassword = correctPassword.toLowerCase().replace(/\s+/g, '');
 
-            if (input.toLowerCase() === correctPassword) {
+            // 3. 띄어쓰기를 쫙 뺀 두 글자가 똑같은지 확인합니다.
+            if (cleanInput === cleanPassword) {
                 lockScreen.style.display = "none";
                 secretContent.style.display = "block";
             } else {
