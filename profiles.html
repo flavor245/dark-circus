@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profiles - The Dark Circus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- [기본 세팅 (메인과 동일)] --- */
+        body { background-color: #050505; color: #dcdcdc; font-family: 'Noto Sans KR', sans-serif; margin: 0; overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        nav { display: flex; justify-content: space-between; padding: 20px 50px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #fff; }
+        .menu { display: flex; gap: 40px; list-style: none; margin: 0; padding: 0; }
+        .menu li a { font-family: 'Cinzel', serif; opacity: 0.6; }
+        .menu li a:hover { opacity: 1; color: #ff003c; text-shadow: 0 0 10px rgba(255, 0, 60, 0.5); }
+
+        /* --- [프로필 컨텐츠 영역] --- */
+        .container { padding: 100px 50px; max-width: 1000px; margin: 0 auto; }
+        h1.page-title { font-family: 'Cinzel', serif; text-align: center; font-size: 3rem; margin-bottom: 50px; letter-spacing: 5px; color: #fff; text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
+
+        /* --- [게임 상태창 스타일 레이아웃] --- */
+        .character-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        
+        .char-card {
+            border: 1px solid #333;
+            background: linear-gradient(145deg, #111, #080808);
+            padding: 25px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            transition: 0.3s;
+        }
+        .char-card:hover { border-color: #ff003c; transform: translateY(-5px); }
+
+        /* 초상화/스프라이트 영역 */
+        .portrait-box {
+            width: 100%; height: 250px;
+            background: #000;
+            border: 1px solid #444;
+            margin-bottom: 20px;
+            display: flex; justify-content: center; align-items: center;
+            font-family: 'Cinzel', serif; color: #444; letter-spacing: 2px;
+            background-size: cover; background-position: center;
+        }
+
+        /* 이름 및 칭호 */
+        .char-name { font-family: 'Cinzel', serif; font-size: 1.8rem; color: #fff; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 5px; }
+        .char-title { font-size: 0.85rem; color: #ff003c; margin-bottom: 20px; letter-spacing: 2px; }
+
+        /* 게이지 바 (HP/SAN) */
+        .status-bar { margin-bottom: 15px; font-size: 0.8rem; font-weight: bold; letter-spacing: 1px; color: #aaa; }
+        .bar-bg { width: 100%; height: 6px; background: #222; margin-top: 5px; border: 1px solid #000; }
+        .bar-hp { height: 100%; background: #ff003c; width: 75%; } /* 체력 75% */
+        .bar-san { height: 100%; background: #6b00ff; width: 30%; } /* 이성(보라색) 30% */
+
+        /* 스킬 및 특성 (다중 인격 등) */
+        .skill-box { margin-top: 25px; background: #050505; padding: 15px; border: 1px dashed #333; }
+        .skill-title { color: #888; font-size: 0.8rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .tag { display: inline-block; background: #1a1a1a; padding: 4px 10px; margin: 2px; border-radius: 2px; border: 1px solid #444; font-size: 0.8rem; color: #ccc; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">† DARK CIRCUS</div>
+        <ul class="menu">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="worldview.html">WORLDVIEW</a></li>
+            <li><a href="profiles.html" style="color:#ff003c; opacity:1; text-shadow: 0 0 10px rgba(255, 0, 60, 0.5);">PROFILES</a></li>
+            <li><a href="hidden.html">???</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">THE TROUPE</h1>
+        
+        <div class="character-grid">
+            
+            <div class="char-card">
+                <div class="portrait-box">NO DATA</div> 
+                <div class="char-name">PIERROT</div>
+                <div class="char-title">The Weeping Fool</div>
+                
+                <div class="status-bar">
+                    HP (Vitality)
+                    <div class="bar-bg"><div class="bar-hp"></div></div>
+                </div>
+                <div class="status-bar">
+                    SAN (Sanity)
+                    <div class="bar-bg"><div class="bar-san"></div></div>
+                </div>
+
+                <div class="skill-box">
+                    <div class="skill-title">Traits & Skills</div>
+                    <span class="tag">Dual Personality</span> <span class="tag">Illusion</span>
+                    <span class="tag">Agility</span>
+                </div>
+            </div>
+
+            <div class="char-card">
+                <div class="portrait-box">NO DATA</div>
+                <div class="char-name">RINGMASTER</div>
+                <div class="char-title">Director of the Abyss</div>
+                
+                <div class="status-bar">
+                    HP (Vitality)
+                    <div class="bar-bg"><div class="bar-hp" style="width: 100%;"></div></div>
+                </div>
+                <div class="status-bar">
+                    SAN (Sanity)
+                    <div class="bar-bg"><div class="bar-san" style="width: 90%; background: #6b00ff;"></div></div>
+                </div>
+
+                <div class="skill-box">
+                    <div class="skill-title">Traits & Skills</div>
+                    <span class="tag">Mind Control</span>
+                    <span class="tag">Absolute Order</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
