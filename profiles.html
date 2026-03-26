@@ -3,60 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profiles - The Dark Circus</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>The Troupe - The Dark Circus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* --- [기본 세팅 (메인과 동일)] --- */
+        /* --- [기본 세팅] --- */
         body { background-color: #050505; color: #dcdcdc; font-family: 'Noto Sans KR', sans-serif; margin: 0; overflow-x: hidden; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
+        
+        /* --- [네비게이션] --- */
         nav { display: flex; justify-content: space-between; padding: 20px 50px; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .logo { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #fff; }
         .menu { display: flex; gap: 40px; list-style: none; margin: 0; padding: 0; }
         .menu li a { font-family: 'Cinzel', serif; opacity: 0.6; }
         .menu li a:hover { opacity: 1; color: #ff003c; text-shadow: 0 0 10px rgba(255, 0, 60, 0.5); }
 
-        /* --- [프로필 컨텐츠 영역] --- */
-        .container { padding: 100px 50px; max-width: 1000px; margin: 0 auto; }
-        h1.page-title { font-family: 'Cinzel', serif; text-align: center; font-size: 3rem; margin-bottom: 50px; letter-spacing: 5px; color: #fff; text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
+        /* --- [프로필 컨테이너] --- */
+        .showcase-container {
+            padding: 80px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-        /* --- [게임 상태창 스타일 레이아웃] --- */
-        .character-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        /* --- [캐릭터 영역 공통 (좌우 분할)] --- */
+        .char-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 150px; /* 간격을 조금 더 넓혀서 시원하게 보이게 함 */
+            gap: 50px;
+        }
+
+        /* ▼▼▼ 반전 레이아웃 (오른쪽 텍스트, 왼쪽 이미지) ▼▼▼ */
+        .char-section.reverse {
+            flex-direction: row-reverse;
+        }
+
+        /* --- [텍스트 정보 영역] --- */
+        .char-info { flex: 1; max-width: 600px; }
         
-        .char-card {
-            border: 1px solid #333;
-            background: linear-gradient(145deg, #111, #080808);
-            padding: 25px;
-            position: relative;
-            box-shadow: 0 0 20px rgba(0,0,0,0.8);
-            transition: 0.3s;
+        /* 반전 모드일 때 텍스트를 오른쪽 정렬해서 대칭감 주기 */
+        .char-section.reverse .char-info { text-align: right; }
+        .char-section.reverse .char-lore { 
+            border-left: none; 
+            border-right: 1px solid #333; 
+            padding-left: 0; 
+            padding-right: 20px; 
+            text-align: right; /* 서브타이틀을 포함해 통째로 오른쪽 정렬 */
         }
-        .char-card:hover { border-color: #ff003c; transform: translateY(-5px); }
+        /* (아래에 있던 p 태그 전용 오른쪽 정렬 코드는 이제 필요 없으니 지우셔도 됩니다!) */
 
-        /* 초상화/스프라이트 영역 */
-        .portrait-box {
-            width: 100%; height: 250px;
-            background: #000;
-            border: 1px solid #444;
-            margin-bottom: 20px;
-            display: flex; justify-content: center; align-items: center;
-            font-family: 'Cinzel', serif; color: #444; letter-spacing: 2px;
+        .char-prefix {
+            font-family: 'Cinzel', serif; font-style: italic; color: #888;
+            font-size: 1.2rem; margin-bottom: -10px; display: block;
+        }
+
+        .char-name {
+            font-family: 'Noto Sans KR', sans-serif; font-size: 4.5rem; font-weight: 900;
+            color: #00d2ff; text-transform: uppercase; margin: 0; line-height: 1.1;
+            letter-spacing: -2px; text-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+        }
+
+        .char-quote { color: #aaa; font-size: 1.1rem; margin-top: 15px; margin-bottom: 40px; }
+        
+        .read-more {
+            font-family: 'Cinzel', serif; font-size: 1.2rem; color: #fff;
+            letter-spacing: 3px; border-bottom: 1px solid #333; padding-bottom: 10px;
+            margin-bottom: 30px; display: inline-block; cursor: pointer;
+        }
+        .read-more::after { content: ' ▼'; font-size: 0.8rem; }
+
+        /* 상세 설명 */
+        .char-lore { border-left: 1px solid #333; padding-left: 20px; text-align: left; }
+        .char-section.reverse .char-lore p { text-align: right; } /* 반전 시 우측 정렬 */
+
+        .lore-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 15px; }
+        .lore-title span { font-family: 'Cinzel', serif; color: #666; font-weight: 400; font-style: italic; }
+
+        .lore-desc { font-size: 0.95rem; color: #888; line-height: 1.8; margin-bottom: 15px; word-break: keep-all; }
+        .highlight { color: #fff; font-weight: bold; }
+
+        /* --- [이미지 영역] --- */
+        .char-visual {
+            flex: 1; display: flex; justify-content: flex-end; position: relative;
+        }
+        
+        /* 반전 모드일 때 이미지를 왼쪽으로 밀착 */
+        .char-section.reverse .char-visual { justify-content: flex-start; }
+
+        .image-placeholder {
+            width: 100%; max-width: 600px; height: 700px;
+            background-color: #111;
             background-size: cover; background-position: center;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            position: relative; overflow: hidden;
         }
 
-        /* 이름 및 칭호 */
-        .char-name { font-family: 'Cinzel', serif; font-size: 1.8rem; color: #fff; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 5px; }
-        .char-title { font-size: 0.85rem; color: #ff003c; margin-bottom: 20px; letter-spacing: 2px; }
+        /* 왼쪽 검은색 그라데이션 (기본: 이미지 왼쪽이 어두움) */
+        .image-placeholder::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, #050505 0%, rgba(5,5,5,0.8) 10%, transparent 50%);
+            pointer-events: none; z-index: 1;
+        }
 
-        /* 게이지 바 (HP/SAN) */
-        .status-bar { margin-bottom: 15px; font-size: 0.8rem; font-weight: bold; letter-spacing: 1px; color: #aaa; }
-        .bar-bg { width: 100%; height: 6px; background: #222; margin-top: 5px; border: 1px solid #000; }
-        .bar-hp { height: 100%; background: #ff003c; width: 75%; } /* 체력 75% */
-        .bar-san { height: 100%; background: #6b00ff; width: 30%; } /* 이성(보라색) 30% */
+        /* ▼▼ 반전 모드일 때 그라데이션 방향도 반대로 (이미지 오른쪽이 어두워짐) ▼▼ */
+        .char-section.reverse .image-placeholder::before {
+            background: linear-gradient(to left, #050505 0%, rgba(5,5,5,0.8) 10%, transparent 50%);
+        }
 
-        /* 스킬 및 특성 (다중 인격 등) */
-        .skill-box { margin-top: 25px; background: #050505; padding: 15px; border: 1px dashed #333; }
-        .skill-title { color: #888; font-size: 0.8rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .tag { display: inline-block; background: #1a1a1a; padding: 4px 10px; margin: 2px; border-radius: 2px; border: 1px solid #444; font-size: 0.8rem; color: #ccc; }
+        /* --- [반응형 (모바일에서는 지그재그 무시하고 무조건 세로 정렬)] --- */
+        @media (max-width: 900px) {
+            .char-section, .char-section.reverse { flex-direction: column; text-align: center; }
+            .char-section.reverse .char-info { text-align: center; }
+            .char-lore, .char-section.reverse .char-lore { border: none; padding: 0; }
+            .char-section.reverse .char-lore p { text-align: center; }
+            .char-visual { justify-content: center; width: 100%; margin-top: 40px; }
+            .char-name { font-size: 3rem; }
+            .image-placeholder { height: 500px; }
+        }
     </style>
 </head>
 <body>
@@ -71,54 +134,73 @@
         </ul>
     </nav>
 
-    <div class="container">
-        <h1 class="page-title">THE TROUPE</h1>
+    <div class="showcase-container">
         
-        <div class="character-grid">
-            
-            <div class="char-card">
-                <div class="portrait-box">NO DATA</div> 
-                <div class="char-name">PIERROT</div>
-                <div class="char-title">The Weeping Fool</div>
-                
-                <div class="status-bar">
-                    HP (Vitality)
-                    <div class="bar-bg"><div class="bar-hp"></div></div>
-                </div>
-                <div class="status-bar">
-                    SAN (Sanity)
-                    <div class="bar-bg"><div class="bar-san"></div></div>
-                </div>
-
-                <div class="skill-box">
-                    <div class="skill-title">Traits & Skills</div>
-                    <span class="tag">Dual Personality</span> <span class="tag">Illusion</span>
-                    <span class="tag">Agility</span>
+        <div class="char-section">
+            <div class="char-info">
+                <span class="char-prefix">Chapter 1</span>
+                <h2 class="char-name">Posthime</h2>
+                <p class="char-quote">우아함 뒤에 숨은 <span class="highlight">거짓말쟁이</span></p>
+                <div class="read-more">READ MORE</div>
+                <div class="char-lore">
+                    <div class="lore-title">포스 — <span>마술사</span></div>
+                    <p class="lore-desc">↳ 1800년대 인물, 나이를 가늠할 만한 요소는 많지 않지만, 30대 초반으로 확인된다. 고상한 말투를 사용하며 빅토리아 시대의 연미복을 입고 있는 것이 특징.</p>
+                    <p class="lore-desc">↳ 신성 로마제국의 자유도시 출신으로 생전에도 마차를 끌고 전국을 유랑하며 길거리에서 마술쇼를 선보였다. 그가 떠난 자리에는 늘 화마가 뒤따랐다고 한다.</p>
                 </div>
             </div>
-
-            <div class="char-card">
-                <div class="portrait-box">NO DATA</div>
-                <div class="char-name">RINGMASTER</div>
-                <div class="char-title">Director of the Abyss</div>
-                
-                <div class="status-bar">
-                    HP (Vitality)
-                    <div class="bar-bg"><div class="bar-hp" style="width: 100%;"></div></div>
-                </div>
-                <div class="status-bar">
-                    SAN (Sanity)
-                    <div class="bar-bg"><div class="bar-san" style="width: 90%; background: #6b00ff;"></div></div>
-                </div>
-
-                <div class="skill-box">
-                    <div class="skill-title">Traits & Skills</div>
-                    <span class="tag">Mind Control</span>
-                    <span class="tag">Absolute Order</span>
-                </div>
+            <div class="char-visual">
+                <div class="image-placeholder" style="background-image: url('https://i.imgur.com/OxRuNoq.jpeg');"></div>
             </div>
-
         </div>
+
+        <div class="char-section reverse">
+            <div class="char-info">
+                <span class="char-prefix">Chapter 2</span>
+                <h2 class="char-name" style="color: #8b1a10; text-shadow: 0 0 10px rgba(255, 0, 60, 0.3);">DHAMMA</h2>
+                <p class="char-quote"> Ant or monkey<span class="highlight"></span></p>
+                <div class="read-more">READ MORE</div>
+                <div class="char-lore">
+                    <div class="lore-title">담마 — <span>곡예사</span></div>
+                    <p class="lore-desc">↳ ???</p>
+                </div>
+            </div>
+            <div class="char-visual">
+                <div class="image-placeholder" style="background-image: url('https://cdn.caveduck.io/cdn-cgi/image/f=auto,w=800/charim/535643f7-704f-4e65-ae0c-d2f02b8c173d?v=981d4d');"></div>
+            </div>
+        </div>
+
+        <div class="char-section">
+            <div class="char-info">
+                <span class="char-prefix">Chapter 3</span>
+                <h2 class="char-name" style="color: #ffb700; text-shadow: 0 0 20px rgba(255, 183, 0, 0.3);">STITCH</h2>
+                <p class="char-quote">Punch and Judy <span class="highlight"></span></p>
+                <div class="read-more">READ MORE</div>
+                <div class="char-lore">
+                    <div class="lore-title">스티치 — <span>인형사</span></div>
+                    <p class="lore-desc">↳ ???</p>
+                </div>
+            </div>
+            <div class="char-visual">
+                <div class="image-placeholder" style="background-image: url('https://i.imgur.com/SnAQliW.png');"></div>
+            </div>
+        </div>
+
+        <div class="char-section reverse">
+            <div class="char-info">
+                <span class="char-prefix">Chapter 4</span>
+                <h2 class="char-name" style="color: #A9A9A9; text-shadow: 0 0 20px rgba(169, 169, 169, 0.3);">PHANTOM</h2>
+                <p class="char-quote">LULLABY AND CAGE <span class="highlight"></span></p>
+                <div class="read-more">READ MORE</div>
+                <div class="char-lore">
+                    <div class="lore-title">팬텀 — <span>단장</span></div>
+                    <p class="lore-desc">↳ ???</p>
+                </div>
+            </div>
+            <div class="char-visual">
+                <div class="image-placeholder" style="background-image: url('https://i.imgur.com/tQ5pWA3.png');"></div>
+            </div>
+        </div>
+
     </div>
 
 </body>
