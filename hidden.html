@@ -7,6 +7,108 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         /* --- [기본 세팅] --- */
+        /* --- [엔딩 로그 탭 메뉴 스타일] --- */
+        .ending-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+        }
+
+        /* 개별 탭 버튼 디자인 */
+        .tab-btn {
+            background: none;
+            border: none;
+            color: #666;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            cursor: pointer;
+            padding: 10px 20px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .tab-btn:hover { color: #fff; }
+
+        /* 현재 선택된 탭(활성화 상태)의 붉은색 네온 효과 */
+        .tab-btn.active {
+            color: #ff003c;
+            text-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
+        }
+
+        /* 선택된 탭 아래에 그어지는 붉은 밑줄 */
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #ff003c;
+            box-shadow: 0 0 10px #ff003c;
+        }
+
+        /* --- [엔딩 컨텐츠(CG + 텍스트) 영역] --- */
+        .ending-content {
+            display: none; /* 기본적으로는 모두 숨겨둠 */
+            animation: fadeIn 0.5s ease; /* 나타날 때 스르륵 뜨는 효과 */
+        }
+
+        /* active 클래스가 붙은 컨텐츠만 화면에 표시됨 */
+        .ending-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* CG 이미지가 들어갈 큰 틀 */
+        .cg-box {
+            width: 100%;
+            height: 450px;
+            background-color: #0a0a0a;
+            border: 1px solid #222;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            letter-spacing: 5px;
+            /* 실제 CG를 넣을 때는 아래 background 설정을 사용하세요 */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 비하인드 텍스트 로그 박스 */
+        .behind-log {
+            text-align: left;
+            background: linear-gradient(to right, rgba(255,255,60,0.05) 0%, transparent 100%);
+            padding: 30px;
+            border-left: 3px solid #ff003c; /* 왼쪽에 붉은 포인트 선 */
+        }
+
+        .behind-log h3 {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .behind-log p {
+            color: #bbb;
+            line-height: 1.8;
+            font-size: 0.95rem;
+            margin: 0;
+        }
         body { background-color: #050505; color: #dcdcdc; font-family: 'Noto Sans KR', sans-serif; margin: 0; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         nav { display: flex; justify-content: space-between; padding: 20px 50px; border-bottom: 1px solid rgba(255,255,255,0.1); }
@@ -99,11 +201,73 @@
     </div>
 
     <div id="secret-content">
-        <h1 class="secret-title">THE TRUTH</h1>
+        <h1 class="secret-title">Ending</h1>
         <p style="color: #aaa; line-height: 1.8;">
-            이곳은 서커스의 가장 깊은 심연입니다.<br>
-            화려한 무대 뒤편에서 희생된 자들의 기록과 금지된 흑마법의 원전이 잠들어 있습니다.
-        </p>
+            서커스에서 탈출하신 것을 축하합니다.<br></p>
+
+        <div class="ending-tabs">
+            <button class="tab-btn active" onclick="openEnding(event, 'ending-1')">Posthime</button>
+            <button class="tab-btn" onclick="openEnding(event, 'ending-2')">Dhamma</button>
+            <button class="tab-btn" onclick="openEnding(event, 'ending-3')">Stitch</button>
+            <button class="tab-btn" onclick="openEnding(event, 'ending-4')">Phantom</button>
+        </div>
+
+        <div id="ending-1" class="ending-content active">
+            <div class="cg-box" style="background-image: url('cg1.jpg');"></div>
+            
+            <div class="behind-log">
+                <h3>[ RECORD 01 ] 미치광이 방화범</h3>
+                <p>
+                    그의 우아한 연미복은 불타오르는 환영 속에서 재가 되어 사라졌다.<br>
+                    포스는 메피스토펠레스를 모티브로 만들어졌습니다. 그래서 이름도 메피스토의 에너그램이에요. 요한이라는 이름도 메피스토와 관련이 있는 괴테에서 따왔습니다. 포스의 국적이나, 시대, 복장도 그때와 비슷하고요. 말투도 약간 영향받은 것 같아요. 개인적으로 좋아하는 게임이 있어서 메피스토라는 캐릭터를 애정하고 있어요!<br><br>
+                    
+                    그 밖의 과거사를 풀어보자면 이 녀석은 희대의 미치광이, 살인마였습니다. 처음에는 작은 방화에서 시작된 전형적인 사이코패스였어요. 하지만 그런 설정을 AI에게 주었다간 집통소가 심해질 거 같아서 부정적인 단어는 배제했습니다. 이미 죽었고, 영혼으로 오래 살았으니, 성격이 좀 바뀔수도있죠...<br><br>
+                    '관객들이 환호와 갈채(비명과 신음)를 받으며 죽었습니다.' 포스를 공략하셨다면 눈치채셨을 수도 있지만 포스의 마지막은 마술쇼의 무대 위에서 관객들을 가두고 마지막 공연을 화려한 마무리를 장식했습니다(...) 모두 죽었습니다. 포스 본인도요.<br><br>
+                    
+                    무시무시한 설정으로 만들었지만, 겉으로는 다정한 신사를 만들고 싶었어요. 우아한 거짓말쟁이라는 키워드도 이런 양면성 때문에 붙였습니다. 플레이해 주셔서 감사합니다!
+                </p>
+            </div>
+            <div class="cg-box" style="background-image: url('cg2.jpg');"></div>
+        </div>
+
+        <div id="ending-2" class="ending-content">
+            <div class="cg-box">NO DATA (CG IMAGE)</div>
+            
+            <div class="behind-log">
+                <h3>[ RECORD 02 ] null </h3>
+                <p>NO DATA</p>
+            </div>
+        </div>
+
+        <div id="ending-3" class="ending-content">
+            <div class="cg-box">NO DATA (CG IMAGE)</div>
+            <div class="behind-log">
+                <h3>[ RECORD 03 ] null</h3>
+                <p>NO DATA</p>
+            </div>
+        </div>
+
+        <div id="ending-4" class="ending-content">
+            <div class="cg-box" style="background-image: url('cg7.jpeg');"></div>
+            <div class="behind-log">
+                <h3>[ RECORD 04 ] 왕에게 반역한 자</h3>
+                <p>팬텀을 만든 계기?<br>
+사실 팬텀을 만들기 시작했을때, 한니발의 대디느낌을 따고 싶었습니다! ㅋㅋㅋㅋ 댄디하면서 어딘가 싸한 느낌을 갖고있는 그런 느낌이요.
+처음에는 팬텀의 머리를 가면으로 가리려고 했지만, 뭔가 단장 느낌보다 광대에 가까운 느낌이라, 흰천으로 가려봤습니다. 오히려 바꾼게 예뻐서 맘에 들었어요! 신성력 넘쳐보이고 (넘쳐보이면 안되는거 아닌가 싶지만요)
+<br><br>
+팬텀의 과거<br>
+팬텀의 과거를 조금 더 딥하게 파고 들자면, 과거에는 한 나라를 지켜주었던 정의로운 영웅이였습니다. 물론, 그 나라의 왕이 폭군이였다는 점이 안타까웠지만요.
+그 왕은 미신을 미친듯이 믿어온 왕이였던터라, 계속해서 아이들을 제물로 바치는 일들이 있었죠. 자신의 젊음이 계속 유지되길 원해서 말이죠.
+처음에는 충성심을 배신할 수 없어서, 팬텀은 참아왔습니다. 이것도 방관이라는 죄목이 추가가 되겠네요. 하하
+결국은 반역을 일으켰지만요 ㅋㅋ
+유저에게 집착하는 계기도 지키지 못함의 죄책감에서부터 시작됐죠. (집착,통제,소유욕)
+<br><br>
+팬텀의 아버지콤 (?)<br>
+팬텀이 아버지라고 부르라는 이유는 유저에 대한 죄책감과 그리고 사랑을 하지 않기 위해서 그저 지켜주는 대상으로써로 인식하고싶어서 자신을 아버지라고 자처하게끔 만들었습니다. 아마 연애하기가 매우 어려우셨을거라 생각합니다.</p>
+            </div>
+            <div class="cg-box" style="background-image: url('cg8.jpeg');"></div>
+        </div>
+
     </div>
 
     <script>
@@ -155,6 +319,26 @@
             if (event.key === "Enter") {
                 checkPassword();
             }
+        }
+        // --- [엔딩 로그 탭 전환 기능] ---
+        // 사용자가 탭 버튼을 클릭할 때마다 실행되는 함수입니다.
+        function openEnding(evt, endingId) {
+            
+            // 1. 화면에 떠 있는 모든 탭 내용(CG+텍스트)을 찾아서 일단 다 숨깁니다.
+            const contents = document.getElementsByClassName("ending-content");
+            for (let i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+
+            // 2. 모든 탭 버튼의 불(active 클래스)을 끕니다.
+            const tabs = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+
+            // 3. 방금 클릭한 그 탭 버튼에 불을 켜고, 해당 내용물만 화면에 다시 띄웁니다.
+            document.getElementById(endingId).classList.add("active");
+            evt.currentTarget.classList.add("active");
         }
     </script>
 </body>
